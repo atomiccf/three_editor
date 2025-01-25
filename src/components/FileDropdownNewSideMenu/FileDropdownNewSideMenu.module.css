@@ -1,0 +1,30 @@
+.fdnsm_menu {
+    display: none;
+}
+
+.fdnsm_menu_show {
+    padding: 0;
+    display: block;
+    position: fixed;
+    left: 150px;
+    top:30px;
+    height: auto;
+    background-color: var(--primary-color);
+    min-width: 150px;
+}
+
+.fdnsm_menu_item {
+    position: relative;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    list-style: none;
+    color: var(--primary-text-color);
+    text-align: left;
+}
+
+
+.fdnsm_menu_item:nth-child(1) {
+    border-bottom: 0.5px solid var(--border-color);
+}
+
+
