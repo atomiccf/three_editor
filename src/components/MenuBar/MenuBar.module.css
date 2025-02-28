@@ -12,6 +12,7 @@
     flex-flow: row nowrap;
     align-items: center;
     gap: 10px;
+    z-index: 1;
 }
 
 .upper_menu_item {

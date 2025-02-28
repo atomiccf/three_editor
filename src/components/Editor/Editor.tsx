@@ -5,7 +5,6 @@ import { EditorViewport } from "../EditorViewport/EditorViewport.tsx";
 export const Editor:React.FC = () => {
     return (
         <Canvas
-            camera={{ position: [0, 10, 20], fov: 50 }}
             shadows
             gl={{ preserveDrawingBuffer: true }}
         >
