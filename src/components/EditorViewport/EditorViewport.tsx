@@ -1,43 +1,21 @@
 import React from 'react'
 import { useThree } from '@react-three/fiber'
 import { OrbitControls, TransformControls, Grid, GizmoHelper, GizmoViewport } from '@react-three/drei'
-import { db } from '../../../db.ts'
 import {useEffect,  useState} from 'react'
 import * as THREE from 'three';
-import {EffectRenderer} from "../EffectRenderer/EffectRenderer.tsx";
+import { EffectRenderer } from "../EffectRenderer/EffectRenderer.tsx";
+import { CameraObject } from "./EditorViewport.types.ts";
+import { db } from '../../../db.ts'
 
 
-type CameraObject = {
-    position: { x: number; y: number; z: number };
-    aspect: number;
-    far: number;
-    filmGauge: number;
-    filmOffset: number;
-    focus: number;
-    fov: number;
-    layers: number;
-    matrix: number[];
-    name: string;
-    near: number;
-    type: string;
-    up: {
-        x: number;
-        y: number;
-        z: number;
-    };
-    uuid: string;
-    zoom: number;
-};
 
 export const EditorViewport: React.FC = () => {
     const [selected,] = useState()
     const [transformMode, ] = useState< 'translate' | 'scale' | 'rotate' >('translate')
-    const { camera } = useThree<{
-        camera: THREE.PerspectiveCamera;
-    }>()
+    const { camera } = useThree<{camera:THREE.PerspectiveCamera}>()
 
     const onChange = () => {
-        const newCameraState:CameraObject = {
+        const newCameraState = {
             position: camera.position,
             aspect: camera.aspect,
             far: camera.far,
@@ -58,7 +36,6 @@ export const EditorViewport: React.FC = () => {
        const dataBase = db.state.get(1)
 
        if (JSON.stringify(dataBase) !== JSON.stringify(newCameraState)) {
-            // @ts-expect-error need type fix
            db.state.update(1, { camera: newCameraState });
         }
 
@@ -69,9 +46,8 @@ export const EditorViewport: React.FC = () => {
         setSelected(e.object)
     }*/
 
-    // set camera into db
     useEffect(() => {
-        db.state.count().then((value) => {
+        db.state.count().then((value: number) => {
             if (value > 0) {
                 return
             } else {
@@ -99,14 +75,14 @@ export const EditorViewport: React.FC = () => {
                 });
             }
         })
-    }, []);
+    });
 
     useEffect(() => {
-        db.state.get(1).then((dataBase) => {
+        db.state.get(1).then((dataBase:{camera:CameraObject}) => {
             if (!dataBase || !dataBase.camera) return;
 
-            // @ts-expect-error need type fix
-            const savedCamera:CameraObject = dataBase.camera;
+
+            const savedCamera = dataBase.camera;
             camera.position.set(savedCamera.position.x, savedCamera.position.y, savedCamera.position.z);
             camera.aspect = savedCamera.aspect;
             camera.far = savedCamera.far;
@@ -114,7 +90,7 @@ export const EditorViewport: React.FC = () => {
             camera.filmOffset = savedCamera.filmOffset;
             camera.focus = savedCamera.focus;
             camera.fov = savedCamera.fov;
-            camera.layers.mask = savedCamera.layers;
+            camera.layers.mask = savedCamera.layers.mask;
             camera.matrix.fromArray(savedCamera.matrix);
             camera.name = savedCamera.name;
             camera.near = savedCamera.near;
