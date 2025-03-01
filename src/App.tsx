@@ -1,15 +1,18 @@
 import React from 'react'
 import './App.css'
-import {MenuBar} from "./components/MenuBar/MenuBar.tsx";
+import { MenuBar } from "./components/MenuBar/MenuBar.tsx";
 
-export const  App:React.FC = () => {
+import { Editor } from "./components/Editor/Editor.tsx";
+
+export const App: React.FC = () => {
 
 
-  return (
-    <>
-    <MenuBar />
-    </>
-  )
+    return (
+        <>
+            <MenuBar/>
+            <Editor/>
+        </>
+    )
 }
 
 
