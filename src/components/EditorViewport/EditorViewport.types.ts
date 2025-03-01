@@ -6,7 +6,7 @@
     filmOffset: number;
     focus: number;
     fov: number;
-    layers: { mask:number };
+    layers: number;
     matrix: number[];
     name: string;
     near: number;

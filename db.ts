@@ -23,14 +23,10 @@ type CameraObject = {
     zoom: number;
 };
 
-interface Camera {
-    object: CameraObject;
-}
-
 
 interface State {
     id?: number;
-    camera: Camera;
+    camera: CameraObject;
 }
 
 

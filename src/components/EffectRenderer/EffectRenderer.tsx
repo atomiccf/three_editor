@@ -9,7 +9,6 @@ export const EffectRenderer = () => {
     useEffect(() => {
         const pmremGenerator = new THREE.PMREMGenerator(gl)
         scene.environment = pmremGenerator.fromScene(new RoomEnvironment()).texture
-    })
-
+    },[gl])
     return null
 }
