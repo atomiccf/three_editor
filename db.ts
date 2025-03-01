@@ -9,7 +9,6 @@ type CameraObject = {
     filmOffset: number;
     focus: number;
     fov: number;
-    layers: number;
     matrix: number[];
     name: string;
     near: number;
@@ -23,14 +22,10 @@ type CameraObject = {
     zoom: number;
 };
 
-interface Camera {
-    object: CameraObject;
-}
-
 
 interface State {
     id?: number;
-    camera: Camera;
+    camera: CameraObject;
 }
 
 
